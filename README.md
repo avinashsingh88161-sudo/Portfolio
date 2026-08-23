@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Avinash Singh — Premium Developer Portfolio
 
-## Getting Started
+A production-quality personal developer portfolio website designed for **Avinash Singh**, a Full Stack Developer focused on the **MERN Stack**. Built with a dark glassmorphic design theme, interactive 3D physics geometries, and smooth scroll transitions.
 
-First, run the development server:
+## 🚀 Tech Stack
+* **Framework**: Next.js 14 (App Router)
+* **Programming Language**: TypeScript
+* **Styling**: Tailwind CSS
+* **Animations**: Framer Motion
+* **3D Visuals**: Three.js, React Three Fiber (R3F), and React Three Drei
+* **Icons**: Lucide React and React Icons (for specialized technology and brand icons)
+* **Testing Suite**: Vitest, React Testing Library, jsdom
 
+## 📁 Key Features
+* **Interactive 3D Hero Scene**: Dynamic floating 3D objects that react to mouse hover and pointer position tracking.
+* **Glassmorphic UI Elements**: Glass backdrop-blur cards with 3D tilt effects using CSS perspective transforms.
+* **Interactive Technologies Grid**: Categorized tech tags highlighting original brand colors on mouse hover.
+* **Experience Timeline**: Progressively animated chronological journey from BCA studies to active software internships.
+* **Production Quality Code**: Full TypeScript annotations, component lifecycle warning filters, and dynamic SSR bundles.
+* **Validated Forms**: Contact input forms complete with client-side field validation and simulated submission indicators.
+
+## 💻 Getting Started
+
+### 1. Install Dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Run the Local Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your web browser to check the final layout.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Run Unit Tests
+```bash
+npm run test
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Build for Production Compilation
+```bash
+npm run build
+```
 
-## Learn More
+## 📧 Profiles & Contact
+* **GitHub**: [github.com/avinashsingh88161-sudo](https://github.com/avinashsingh88161-sudo)
+* **LinkedIn**: [linkedin.com/in/avinash-singh-62a312384](https://linkedin.com/in/avinash-singh-62a312384)
+* **Email**: avinashsingh88161@gmail.com
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

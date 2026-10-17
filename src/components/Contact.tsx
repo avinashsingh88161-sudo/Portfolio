@@ -2,10 +2,8 @@
 
 import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, CheckCircle, AlertCircle } from "lucide-react";
+import { Send, Mail, CheckCircle2, AlertCircle, MapPin } from "lucide-react";
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
-import SectionHeading from "./ui/SectionHeading";
-import GlassCard from "./ui/GlassCard";
 
 interface FormState {
   name: string;
@@ -16,7 +14,7 @@ interface FormState {
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
-const contactInfo = [
+const contactCards = [
   {
     icon: Mail,
     label: "Email",
@@ -24,16 +22,16 @@ const contactInfo = [
     href: "mailto:avinashsingh88161@gmail.com",
   },
   {
-    icon: FaGithub,
-    label: "GitHub",
-    value: "github.com/avinashsingh88161-sudo",
-    href: "https://github.com/avinashsingh88161-sudo",
-  },
-  {
     icon: FaLinkedinIn,
     label: "LinkedIn",
     value: "linkedin.com/in/avinash-singh-62a312384",
     href: "https://linkedin.com/in/avinash-singh-62a312384",
+  },
+  {
+    icon: FaGithub,
+    label: "GitHub",
+    value: "github.com/avinashsingh88161-sudo",
+    href: "https://github.com/avinashsingh88161-sudo",
   },
 ];
 
@@ -67,18 +65,14 @@ export default function Contact() {
 
     setStatus("sending");
 
-    // Simulate form submission — replace with actual API call
     setTimeout(() => {
       setStatus("success");
       setForm({ name: "", email: "", subject: "", message: "" });
       setTimeout(() => setStatus("idle"), 5000);
-    }, 1500);
+    }, 1200);
   };
 
-  const handleChange = (
-    field: keyof FormState,
-    value: string
-  ) => {
+  const handleChange = (field: keyof FormState, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors((prev) => {
@@ -91,203 +85,185 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section-padding relative">
-      {/* Background accent */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent/5 rounded-full blur-[120px]" />
-      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <span className="section-tag mb-3">Get In Touch</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+            Let&apos;s Build Something Impactful Together
+          </h2>
+          <p className="text-base sm:text-lg text-slate-600">
+            Have a project in mind, an opportunity to discuss, or just want to connect? Send a message and I&apos;ll get back to you promptly.
+          </p>
+        </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          title="Let's Build Something Great Together"
-          subtitle="Have an idea, a question, or just want to say hello? I'd love to hear from you."
-        />
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Left: Contact Info Cards */}
+          <div className="lg:col-span-5 space-y-4">
+            <div className="bg-white rounded-3xl border border-slate-200/90 p-7 shadow-sm">
+              <h3 className="text-xl font-bold text-slate-900 mb-2">
+                Connect Directly
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 mb-6">
+                I am actively seeking Full Stack & MERN Developer roles. Feel free to reach out across any of these channels:
+              </p>
 
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-3"
-          >
+              <div className="space-y-3.5">
+                {contactCards.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 transition-all group"
+                  >
+                    <div className="p-2.5 rounded-xl bg-white text-emerald-600 border border-slate-200/80 shadow-xs group-hover:border-emerald-300">
+                      <item.icon size={18} />
+                    </div>
+                    <div className="overflow-hidden">
+                      <p className="text-[11px] font-mono font-bold uppercase text-slate-400">
+                        {item.label}
+                      </p>
+                      <p className="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-emerald-700 truncate">
+                        {item.value}
+                      </p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+
+              <div className="mt-6 p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 flex items-center gap-3">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                <p className="text-xs text-emerald-800 font-medium leading-relaxed">
+                  Average response time: <strong>&lt; 24 Hours</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Clean Contact Form */}
+          <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200/90 p-7 sm:p-9 shadow-sm">
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Name & Email Row */}
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
                   <label
-                    htmlFor="contact-name"
-                    className="block text-sm font-medium text-muted mb-2"
+                    htmlFor="name"
+                    className="block text-xs font-mono font-bold text-slate-700 uppercase mb-2"
                   >
-                    Name
+                    Your Name
                   </label>
                   <input
-                    id="contact-name"
+                    id="name"
                     type="text"
                     value={form.name}
                     onChange={(e) => handleChange("name", e.target.value)}
-                    placeholder="Your name"
-                    className={`w-full px-4 py-3 rounded-xl glass text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all ${
-                      errors.name ? "ring-2 ring-red-500/50" : ""
+                    placeholder="e.g. John Doe"
+                    className={`w-full px-4 py-3 rounded-2xl bg-slate-50 border text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all ${
+                      errors.name ? "border-red-400 ring-2 ring-red-200" : "border-slate-200"
                     }`}
                   />
                   {errors.name && (
-                    <p className="text-xs text-red-400 mt-1">{errors.name}</p>
+                    <p className="text-xs text-red-500 mt-1 font-mono">{errors.name}</p>
                   )}
                 </div>
+
                 <div>
                   <label
-                    htmlFor="contact-email"
-                    className="block text-sm font-medium text-muted mb-2"
+                    htmlFor="email"
+                    className="block text-xs font-mono font-bold text-slate-700 uppercase mb-2"
                   >
-                    Email
+                    Email Address
                   </label>
                   <input
-                    id="contact-email"
+                    id="email"
                     type="email"
                     value={form.email}
                     onChange={(e) => handleChange("email", e.target.value)}
-                    placeholder="your@email.com"
-                    className={`w-full px-4 py-3 rounded-xl glass text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all ${
-                      errors.email ? "ring-2 ring-red-500/50" : ""
+                    placeholder="john@example.com"
+                    className={`w-full px-4 py-3 rounded-2xl bg-slate-50 border text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all ${
+                      errors.email ? "border-red-400 ring-2 ring-red-200" : "border-slate-200"
                     }`}
                   />
                   {errors.email && (
-                    <p className="text-xs text-red-400 mt-1">{errors.email}</p>
+                    <p className="text-xs text-red-500 mt-1 font-mono">{errors.email}</p>
                   )}
                 </div>
               </div>
 
-              {/* Subject */}
               <div>
                 <label
-                  htmlFor="contact-subject"
-                  className="block text-sm font-medium text-muted mb-2"
+                  htmlFor="subject"
+                  className="block text-xs font-mono font-bold text-slate-700 uppercase mb-2"
                 >
                   Subject
                 </label>
                 <input
-                  id="contact-subject"
+                  id="subject"
                   type="text"
                   value={form.subject}
                   onChange={(e) => handleChange("subject", e.target.value)}
-                  placeholder="What's this about?"
-                  className={`w-full px-4 py-3 rounded-xl glass text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all ${
-                    errors.subject ? "ring-2 ring-red-500/50" : ""
+                  placeholder="e.g. Project Discussion / Job Opportunity"
+                  className={`w-full px-4 py-3 rounded-2xl bg-slate-50 border text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all ${
+                    errors.subject ? "border-red-400 ring-2 ring-red-200" : "border-slate-200"
                   }`}
                 />
                 {errors.subject && (
-                  <p className="text-xs text-red-400 mt-1">{errors.subject}</p>
+                  <p className="text-xs text-red-500 mt-1 font-mono">{errors.subject}</p>
                 )}
               </div>
 
-              {/* Message */}
               <div>
                 <label
-                  htmlFor="contact-message"
-                  className="block text-sm font-medium text-muted mb-2"
+                  htmlFor="message"
+                  className="block text-xs font-mono font-bold text-slate-700 uppercase mb-2"
                 >
                   Message
                 </label>
                 <textarea
-                  id="contact-message"
+                  id="message"
                   rows={5}
                   value={form.message}
                   onChange={(e) => handleChange("message", e.target.value)}
-                  placeholder="Tell me about your project or idea..."
-                  className={`w-full px-4 py-3 rounded-xl glass text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all resize-none ${
-                    errors.message ? "ring-2 ring-red-500/50" : ""
+                  placeholder="Tell me about your project, timeline, or requirements..."
+                  className={`w-full px-4 py-3 rounded-2xl bg-slate-50 border text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all resize-none ${
+                    errors.message ? "border-red-400 ring-2 ring-red-200" : "border-slate-200"
                   }`}
                 />
                 {errors.message && (
-                  <p className="text-xs text-red-400 mt-1">{errors.message}</p>
+                  <p className="text-xs text-red-500 mt-1 font-mono">{errors.message}</p>
                 )}
               </div>
 
-              {/* Submit */}
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-accent to-accent-secondary text-white font-medium rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-accent/25 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-2xl shadow-md shadow-emerald-600/20 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
               >
                 {status === "sending" ? (
                   <>
                     <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Sending...
+                    <span>Sending Message...</span>
                   </>
                 ) : (
                   <>
                     <Send size={16} />
-                    Send Message
+                    <span>Send Message</span>
                   </>
                 )}
               </button>
 
-              {/* Status Messages */}
               {status === "success" && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center gap-2 text-sm text-green-400"
+                  className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-center gap-2 font-medium"
                 >
-                  <CheckCircle size={16} />
-                  Message sent successfully! I&apos;ll get back to you soon.
-                </motion.div>
-              )}
-              {status === "error" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center gap-2 text-sm text-red-400"
-                >
-                  <AlertCircle size={16} />
-                  Something went wrong. Please try again.
+                  <CheckCircle2 size={18} className="text-emerald-600" />
+                  Thank you! Your message has been sent successfully.
                 </motion.div>
               )}
             </form>
-          </motion.div>
-
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-2 space-y-4"
-          >
-            {contactInfo.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <GlassCard className="flex items-center gap-4 group mb-4">
-                  <div className="p-3 rounded-xl bg-accent/10 text-accent-light group-hover:bg-accent/20 transition-colors">
-                    <item.icon size={20} />
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted uppercase tracking-wider">
-                      {item.label}
-                    </p>
-                    <p className="text-sm font-medium text-foreground group-hover:text-accent-light transition-colors">
-                      {item.value}
-                    </p>
-                  </div>
-                </GlassCard>
-              </a>
-            ))}
-
-            {/* Quick note */}
-            <div className="glass rounded-2xl p-6 mt-6">
-              <p className="text-sm text-muted leading-relaxed">
-                💬 I typically respond within{" "}
-                <span className="text-foreground font-medium">24 hours</span>.
-                Feel free to reach out for collaborations, opportunities, or
-                just to connect!
-              </p>
-            </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

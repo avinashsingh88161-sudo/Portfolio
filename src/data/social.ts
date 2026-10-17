@@ -22,10 +22,10 @@ export const navLinks: NavLink[] = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
+  { label: "Architecture", href: "#architecture" },
   { label: "Experience", href: "#experience" },
-  { label: "GitHub", href: "#github" },
+  { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
 
-export const RESUME_URL = "/resume.pdf"; // Replace with your actual resume URL
+export const RESUME_URL = "https://drive.google.com/file/d/your-resume-id/view"; // Avinash resume link placeholder or pdf

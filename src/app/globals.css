@@ -1,142 +1,173 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #050505;
-  --color-foreground: #e5e5e5;
-  --color-muted: #a3a3a3;
-  --color-accent: #6366f1;
-  --color-accent-light: #818cf8;
-  --color-accent-secondary: #8b5cf6;
-  --color-surface: #0a0a0a;
-  --color-surface-light: #111111;
-  --color-surface-border: #1a1a1a;
-  --color-glass: rgba(255, 255, 255, 0.03);
-  --color-glass-border: rgba(255, 255, 255, 0.06);
-  --color-glass-hover: rgba(255, 255, 255, 0.06);
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  --color-muted: #475569;
+  --color-muted-light: #64748b;
+  --color-emerald-primary: #059669;
+  --color-emerald-hover: #047857;
+  --color-emerald-light: #10b981;
+  --color-emerald-soft: #ecfdf5;
+  --color-emerald-border: #a7f3d0;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f1f5f9;
+  --color-surface-border: #e2e8f0;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
-/* ---- Base ---- */
+/* Base styling */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+  background-color: #f8fafc;
+  color: #0f172a;
   font-family: var(--font-sans);
   overflow-x: hidden;
+  background-image: radial-gradient(#cbd5e1 1.2px, transparent 1.2px);
+  background-size: 28px 28px;
 }
 
-/* ---- Custom Scrollbar ---- */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-surface);
+  background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-surface-border);
-  border-radius: 3px;
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent);
+  background: #10b981;
 }
 
-/* ---- Selection ---- */
+/* Selection */
 ::selection {
-  background-color: rgba(99, 102, 241, 0.3);
-  color: #fff;
+  background-color: #d1fae5;
+  color: #065f46;
 }
 
-/* ---- Utility Classes ---- */
-.glass {
-  background: var(--color-glass);
-  border: 1px solid var(--color-glass-border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+/* Utility Cards & Badges */
+.card-clean {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.25rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
 }
 
-.glass-hover:hover {
-  background: var(--color-glass-hover);
-  border-color: rgba(255, 255, 255, 0.1);
+.card-clean:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.card-emerald-glow:hover {
+  border-color: #6ee7b7;
+  box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.18);
 }
 
-.gradient-border {
-  position: relative;
+.badge-mint {
+  background-color: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
 }
 
-.gradient-border::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 1px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+.badge-mint-pill {
+  background-color: #ecfdf5;
+  border: 1px solid #d1fae5;
+  color: #047857;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.625rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: all 0.2s ease;
 }
 
-.glow-sm {
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+.badge-mint-pill:hover {
+  background-color: #d1fae5;
+  border-color: #a7f3d0;
+  color: #065f46;
 }
 
-.glow-md {
-  box-shadow: 0 0 40px rgba(99, 102, 241, 0.2);
+.heading-emerald {
+  color: #059669;
 }
 
-.glow-accent {
-  box-shadow:
-    0 0 20px rgba(99, 102, 241, 0.3),
-    0 0 60px rgba(139, 92, 246, 0.1);
+.section-tag {
+  background-color: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #059669;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  display: inline-block;
 }
 
-/* ---- Section Spacing ---- */
+/* Pulse dot animation */
+@keyframes pulse-emerald {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.15);
+  }
+}
+
+.animate-pulse-dot {
+  animation: pulse-emerald 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Packet flow animation for architecture simulator */
+@keyframes flow-packet {
+  0% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(12px) scale(1.1);
+  }
+  100% {
+    transform: translateY(24px) scale(0.8);
+    opacity: 0.2;
+  }
+}
+
+.animate-packet {
+  animation: flow-packet 1.5s ease-in-out infinite;
+}
+
+/* Section Spacing */
 .section-padding {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 @media (min-width: 768px) {
   .section-padding {
-    padding-top: 8rem;
-    padding-bottom: 8rem;
-  }
-}
-
-/* ---- Animated Grid Background ---- */
-.bg-grid {
-  background-image: linear-gradient(
-      rgba(255, 255, 255, 0.02) 1px,
-      transparent 1px
-    ),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  html {
-    scroll-behavior: auto;
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
   }
 }

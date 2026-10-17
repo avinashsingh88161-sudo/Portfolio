@@ -1,99 +1,73 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  GraduationCap,
-  Code2,
-  Layers,
-  Rocket,
-  Briefcase,
-  TrendingUp,
-} from "lucide-react";
-import SectionHeading from "./ui/SectionHeading";
+import { GraduationCap, Briefcase, Code2, Rocket, Layers } from "lucide-react";
 import { timelineData } from "@/data/experience";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const iconMap: Record<number, React.ComponentType<any>> = {
-  1: GraduationCap,
+const iconMap: Record<number, React.ComponentType<{ size?: number; className?: string }>> = {
+  1: Briefcase,
   2: Code2,
-  3: Layers,
-  4: Rocket,
-  5: Briefcase,
-  6: TrendingUp,
+  3: Rocket,
+  4: Layers,
+  5: GraduationCap,
 };
 
 export default function Experience() {
   return (
-    <section id="experience" className="section-padding relative">
+    <section id="experience" className="section-padding bg-slate-50/50 relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          title="My Journey"
-          subtitle="Key milestones and experiences that have shaped my development career."
-        />
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="section-tag mb-3">Career & Milestones</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+            Experience & Journey
+          </h2>
+          <p className="text-base sm:text-lg text-slate-600">
+            A chronological timeline of hands-on software development internships, freelance client delivery, and academic foundation.
+          </p>
+        </div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px bg-gradient-to-b from-accent/50 via-accent-secondary/30 to-transparent" />
+        {/* Timeline Container */}
+        <div className="relative border-l-2 border-emerald-200 ml-4 sm:ml-8 pl-6 sm:pl-10 space-y-10">
+          {timelineData.map((item, index) => {
+            const Icon = iconMap[item.id] || Code2;
 
-          <div className="space-y-12">
-            {timelineData.map((item, i) => {
-              const Icon = iconMap[item.id] || Code2;
-              const isLeft = i % 2 === 0;
+            return (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="relative"
+              >
+                {/* Timeline Node Dot */}
+                <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 w-8 h-8 rounded-full bg-white border-2 border-emerald-500 flex items-center justify-center text-emerald-600 shadow-sm">
+                  <Icon size={14} />
+                </div>
 
-              return (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className={`relative flex items-start gap-6 md:gap-0 ${
-                    isLeft ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  {/* Dot on timeline */}
-                  <div className="absolute left-4 md:left-1/2 -translate-x-1/2 z-10">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{
-                        delay: i * 0.1 + 0.2,
-                        type: "spring",
-                        stiffness: 300,
-                      }}
-                      className="w-8 h-8 rounded-full bg-surface border-2 border-accent/50 flex items-center justify-center"
-                    >
-                      <Icon size={14} className="text-accent-light" />
-                    </motion.div>
+                {/* Timeline Content Card */}
+                <div className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 shadow-sm hover:shadow-md hover:border-emerald-300 transition-all duration-300">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span className="badge-mint font-mono text-xs">
+                      {item.date}
+                    </span>
+                    <span className="text-xs font-mono font-semibold text-slate-400">
+                      STEP 0{item.id}
+                    </span>
                   </div>
 
-                  {/* Content card */}
-                  <div
-                    className={`ml-14 md:ml-0 md:w-[45%] ${
-                      isLeft ? "md:pr-8 md:text-right" : "md:pl-8"
-                    }`}
-                  >
-                    <div className="glass rounded-2xl p-6 transition-all duration-300 hover:border-white/10 hover:glow-sm group">
-                      <span className="inline-block px-3 py-1 text-xs font-mono rounded-full bg-accent/10 text-accent-light mb-3">
-                        {item.date}
-                      </span>
-                      <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-accent-light transition-colors">
-                        {item.title}
-                      </h3>
-                      <p className="text-sm text-muted leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">
+                    {item.title}
+                  </h3>
 
-                  {/* Empty space for opposite side */}
-                  <div className="hidden md:block md:w-[45%]" />
-                </motion.div>
-              );
-            })}
-          </div>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
